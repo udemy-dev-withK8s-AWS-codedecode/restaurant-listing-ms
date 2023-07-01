@@ -81,20 +81,20 @@ pipeline {
      stage('Cleanup Workspace') {
       steps {
         deleteDir()
-        script{
+        // script{
 
-           sh "git clone ${env.REPO_URL}"
-           sh 'cd deployment-folder'
-           sh 'pwd'
-           sh '''
-          sed -i "s/image:.*/image: codedecode25\\/restaurant-listing-service:${VERSION}/" aws/restaurant-manifest.yml
-        '''
+        //    sh "git clone ${env.REPO_URL}"
+        //    sh 'cd deployment-folder'
+        //    sh 'pwd'
+        //    sh '''
+        //   sed -i "s/image:.*/image: codedecode25\\/restaurant-listing-service:${VERSION}/" aws/restaurant-manifest.yml
+        // '''
 
-          sh 'git checkout master'
-          sh 'git add .'
-          sh 'git commit -m "Update image tag"'
-          sh "git -c http.extraheader='Authorization: Bearer ${env.GIT_TOKEN}' push origin master --quiet"
-        }
+        //   sh 'git checkout master'
+        //   sh 'git add .'
+        //   sh 'git commit -m "Update image tag"'
+        //   sh "git -c http.extraheader='Authorization: Bearer ${env.GIT_TOKEN}' push origin master --quiet"
+        // }
 
        
       }
@@ -126,7 +126,7 @@ pipeline {
           sh 'git checkout master'
           sh 'git add .'
           sh 'git commit -m "Update image tag"'
-          sh 'git push'
+          sh "git -c http.extraheader='Authorization: Bearer ${env.GIT_TOKEN}' push origin master --quiet"
         // sshagent(['git-ssh'])
         //     {
         //           sh('git push')
