@@ -116,22 +116,22 @@ pipeline {
 
     stage('Update Image Tag in GitOps') {
       steps {
-         checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[ credentialsId: 'git-personal-token', url: 'https://github.com/udemy-dev-withK8s-AWS-codedecode/deployment-folder.git']])
+         checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[ credentialsId: 'git-ssh', url: 'git@github.com:udemy-dev-withK8s-AWS-codedecode/deployment-folder.git']])
         script {
           // Set the new image tag with the Jenkins build number
        sh '''
           sed -i "s/image:.*/image: codedecode25\\/restaurant-listing-service:${VERSION}/" aws/restaurant-manifest.yml
         '''
-          sh 'git config user.email "codedecodebusiness@gmail.com"'
-          sh 'git config user.name "codedecode25"'
+         /*  sh 'git config user.email "codedecodebusiness@gmail.com"'
+          sh 'git config user.name "codedecode25"' */
           sh 'git checkout master'
           sh 'git add .'
           sh 'git commit -m "Update image tag"'
-          sh "git -c http.extraheader='Authorization: Bearer ${env.GIT_TOKEN}' push origin master --quiet"
-        // sshagent(['git-ssh'])
-        //     {
-        //           sh('git push')
-        //     }
+        /*   sh "git -c http.extraheader='Authorization: Bearer ${env.GIT_TOKEN}' push origin master --quiet" */
+        sshagent(['git-ssh'])
+            {
+                  sh('git push')
+            }
         }
       }
     }
