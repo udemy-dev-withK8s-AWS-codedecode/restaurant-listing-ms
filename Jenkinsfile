@@ -101,7 +101,7 @@ pipeline {
         script {
           // Set the new image tag with the Jenkins build number
        sh '''
-          sed -i "s/image:.*/image: codedecode25\\/restaurant:${VERSION}/" dev/restaurantdepl.yml
+          sed -i "s/image:.*/image: codedecode25\\/restaurant-listing-service:${VERSION}/" aws/restaurant-manifest.yml
         '''
 
           sh 'git checkout master'
