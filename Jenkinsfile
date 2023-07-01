@@ -6,7 +6,6 @@ pipeline {
     DOCKERHUB_CREDENTIALS = credentials('DOCKER_HUB_CREDENTIAL')
     GIT_TOKEN = credentials('git-personal-token')
     REPO_URL = 'https://github.com/udemy-dev-withK8s-AWS-codedecode/deployment-folder.git'
-    }
     VERSION = "${env.BUILD_ID}"
 
   }
