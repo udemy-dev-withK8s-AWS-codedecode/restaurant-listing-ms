@@ -69,13 +69,13 @@ pipeline {
         } */
 
 
-     stage('Docker Build and Push') {
+  /*    stage('Docker Build and Push') {
       steps {
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
           sh 'docker build -t codedecode25/restaurant-listing-service:${VERSION} .'
           sh 'docker push codedecode25/restaurant-listing-service:${VERSION}'
       }
-    }
+    } */
 
 
      stage('Cleanup Workspace') {
@@ -85,6 +85,7 @@ pipeline {
 
            sh "git clone ${env.REPO_URL}"
            sh 'cd deployment-folder'
+           sh 'pwd'
            sh '''
           sed -i "s/image:.*/image: codedecode25\\/restaurant-listing-service:${VERSION}/" aws/restaurant-manifest.yml
         '''
