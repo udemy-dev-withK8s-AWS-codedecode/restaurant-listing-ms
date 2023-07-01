@@ -1,0 +1,41 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+   name: azingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: angular-service
+                port:
+                  number: 80
+          - path: /order
+            pathType: Prefix
+            backend:
+              service:
+                name: order-service
+                port:
+                  number: 9094
+          - path: /restaurant
+            pathType: Prefix
+            backend:
+              service:
+                name: restaurant-service
+                port:
+                  number: 9091
+          - path: /fooditems
+            pathType: Prefix
+            backend:
+              service:
+                name: foodcatalogue-service
+                port:
+                  number: 9092
+
+
+    # This section is only required if TLS is to be enabled for the Ingress
+  
