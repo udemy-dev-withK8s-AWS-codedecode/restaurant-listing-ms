@@ -4,7 +4,11 @@ pipeline {
   environment {
     DOCKER_REGISTRY = "docker.io"
     DOCKERHUB_CREDENTIALS = credentials('DOCKER_HUB_CREDENTIAL')
+    GIT_TOKEN = credentials('git-personal-token')
+    REPO_URL = 'https://github.com/udemy-dev-withK8s-AWS-codedecode/deployment-folder.git'
+    }
     VERSION = "${env.BUILD_ID}"
+
   }
 
   tools {
@@ -78,6 +82,20 @@ pipeline {
      stage('Cleanup Workspace') {
       steps {
         deleteDir()
+        script{
+
+           sh "git clone ${env.REPO_URL}"
+           sh '''
+          sed -i "s/image:.*/image: codedecode25\\/restaurant-listing-service:${VERSION}/" aws/restaurant-manifest.yml
+        '''
+
+          sh 'git checkout master'
+          sh 'git add .'
+          sh 'git commit -m "Update image tag"'
+          sh "git -c http.extraheader='Authorization: Bearer ${env.GIT_TOKEN}' push origin master --quiet"
+        }
+
+       
       }
     }
 
