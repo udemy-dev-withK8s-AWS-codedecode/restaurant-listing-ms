@@ -107,10 +107,11 @@ pipeline {
           sh 'git checkout master'
           sh 'git add .'
           sh 'git commit -m "Update image tag"'
-        sshagent(['git-ssh'])
-            {
-                  sh('git push')
-            }
+          sh 'git push'
+        // sshagent(['git-ssh'])
+        //     {
+        //           sh('git push')
+        //     }
         }
       }
     }
