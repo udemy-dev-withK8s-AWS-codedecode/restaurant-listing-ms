@@ -16,11 +16,11 @@ pipeline {
   }
 
   stages {
-    stage('Clone Repository') {
+   /*  stage('Clone Repository') {
       steps {
       checkout scmGit(branches: [[name: '*//* master']], extensions: [], userRemoteConfigs: [[credentialsId: 'git-ssh', url: 'git@github.com:udemy-code-decode/restaurant-listing-service.git']])
       }
-    }
+    } */
 
     stage('Maven Build'){
         steps{
