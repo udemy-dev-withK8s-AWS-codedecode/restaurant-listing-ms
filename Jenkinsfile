@@ -84,6 +84,7 @@ pipeline {
         script{
 
            sh "git clone ${env.REPO_URL}"
+           sh 'cd deployment-folder'
            sh '''
           sed -i "s/image:.*/image: codedecode25\\/restaurant-listing-service:${VERSION}/" aws/restaurant-manifest.yml
         '''
