@@ -122,7 +122,8 @@ pipeline {
        sh '''
           sed -i "s/image:.*/image: codedecode25\\/restaurant-listing-service:${VERSION}/" aws/restaurant-manifest.yml
         '''
-
+          sh 'git config user.email "codedecodebusiness@gmail.com"'
+          sh 'git config user.name "codedecode25"'
           sh 'git checkout master'
           sh 'git add .'
           sh 'git commit -m "Update image tag"'
