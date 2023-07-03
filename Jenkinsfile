@@ -35,7 +35,7 @@ pipeline {
 
     stage('SonarQube Analysis') {
   steps {
-    sh 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.host.url=http://3.26.201.237:9000/ -Dsonar.login=squ_64aeb95ed58d2043f2f70cd21b90066f6ea7d468'
+    sh 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.host.url=http://52.47.128.79:9000/ -Dsonar.login=squ_2d9af290a5224af0ff99a3c45fc6ff8f85ee96ee'
   }
 }
 
