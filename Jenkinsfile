@@ -27,7 +27,7 @@ pipeline {
         }
     }
 
-    /*  stage('Run Tests') {
+     stage('Run Tests') {
       steps {
         sh 'mvn test'
       }
@@ -65,7 +65,7 @@ pipeline {
                     }
                 }
             }
-        } */
+        } 
 
 
   /*    stage('Docker Build and Push') {
